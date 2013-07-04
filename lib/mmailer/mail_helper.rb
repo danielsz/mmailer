@@ -1,5 +1,3 @@
-require 'mail'
-require 'erb'
 
 class MailHelper
   attr_reader :template, :title
