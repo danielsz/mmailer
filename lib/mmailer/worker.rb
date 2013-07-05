@@ -4,7 +4,7 @@ module Mmailer
 
     def initialize(from)
       @from = from
-      @obj = DRbObject.new_with_uri('druby://localhost:8080')
+      @obj = DRbObject.new_with_uri('druby://localhost:12345')
       @mailHelper = MailHelper.new
       load_collection
       exec

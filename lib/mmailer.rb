@@ -2,9 +2,7 @@ require "mmailer/version"
 
 module Mmailer
   require 'erb'
-  require 'drb/drb'
-  require 'mail_helper'
-  require 'master_helper'
-  require 'worker'
-  require 'master'
+  require 'mmailer/master_helper'
+  require 'mmailer/mail_helper'
+  require 'mmailer/worker'
 end
