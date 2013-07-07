@@ -1,19 +1,21 @@
 require "mmailer/version"
 
 module Mmailer
-  require 'bundler'
   require 'mail'
   require 'micromachine'
   require 'erb'
+  require 'drb/drb'
+  require 'mmailer/config'
+  require 'mmailer/providers'
+  require 'mmailer/server'
   require 'mmailer/master_helper'
   require 'mmailer/mail_helper'
   require 'mmailer/worker'
 
-# read config
 
-  config = File.join(Bundler.root, 'config.rb')
+## read config
+  config = File.join(Dir.pwd, 'config.rb')
 
-  puts Dir.pwd
   if File.exists? config
     load config
   else

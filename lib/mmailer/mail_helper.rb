@@ -1,11 +1,11 @@
 module Mmailer
   class MailHelper
-    attr_reader :template, :title
+    attr_reader :template, :subject
 
-    def initialize(args)
+    def initialize
       set_provider args.fetch(:provider, :mailchimp)
       @template=args[:template]
-      @title=args[:title]
+      @subject=args[:subject]
     end
 
     def set_provider(provider)
@@ -19,14 +19,14 @@ module Mmailer
         to user.email
         from 'Etsy Fu <info@shopi-fu.com>'
       end
-      mail.subject = title
+      mail.subject = subject
 
       text_part = Mail::Part.new
-      text_part.body=ERB.new(File.read("#{Bundler.root}/lib/mailer/templates/#{template}.txt.erb")).result(binding)
+      text_part.body=ERB.new(File.read(Dir.pwd + Mmailer.configuration.template)).result(binding)
 
       html_part = Mail::Part.new
       html_part.content_type='text/html; charset=UTF-8'
-      html_part.body=ERB.new(File.read("#{Bundler.root}/lib/mailer/templates/#{template}.html.erb")).result(binding)
+      html_part.body=ERB.new(File.read(Dir.pwd + Mmailer.configuration.template)).result(binding)
 
       mail.text_part = text_part
       mail.html_part = html_part

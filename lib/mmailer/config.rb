@@ -17,6 +17,6 @@ module Mmailer
   end
 
   class Configuration
-    attr_accessor :provider, :template, :server_port
+    attr_accessor :provider, :template, :subject, :server_port, :collection
   end
 end
