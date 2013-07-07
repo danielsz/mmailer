@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+begin
+  require 'mmailer'
+rescue LoadError
+  require 'rubygems'
+  require 'mmailer'
+end
+
+Mmailer.start_server

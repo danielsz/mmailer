@@ -51,8 +51,9 @@ module Mmailer
     def start(from=0)
       if machine.trigger(:start)
         puts "starting from #{from}"
+        Thread.abort_on_exception = true
         @worker = Thread.new(from) do |from|
-          worker = Worker.new(from)
+          Worker.new(from)
         end
       end
     end

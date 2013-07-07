@@ -5,7 +5,8 @@ module Mmailer
     def initialize(from)
       @from = from
       @obj = DRbObject.new_with_uri('druby://localhost:12345')
-      @mailHelper = MailHelper.new
+      meta = { title: "Test email", template: "test", provider: :google }
+      @mailHelper = MailHelper.new(meta)
       load_collection
       exec
     end
