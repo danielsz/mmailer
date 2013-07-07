@@ -18,7 +18,7 @@ module Mmailer
     puts "No configuration file found"
   end
 
-  def start_server
+  def Mmailer.start_server
     require 'drb/drb'
     require 'micromachine'
     #uri = ARGV.shift
