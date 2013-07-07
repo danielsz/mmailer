@@ -1,6 +1,6 @@
 module Mmailer
   class << self
-    attr_accessor :configuration, :shop
+    attr_accessor :configuration
 
     def configuration
       @configuration ||= Configuration.new
@@ -10,21 +10,13 @@ module Mmailer
       yield(configuration) if block_given?
     end
 
-    def shop
-      @shop ||= Shop.get(configuration.shop)
+    def provider
+      self.configuration = provider
     end
 
   end
 
   class Configuration
-    attr_accessor :shop
+    attr_accessor :provider, :template, :server_port
   end
-
-  class Shop
-    def self.get(shop)
-      shops = {shopify: Shopify.new, etsy: Etsy.new, dummy: Dummy.new}
-      shops[shop]
-    end
-  end
-
 end

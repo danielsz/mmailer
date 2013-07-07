@@ -9,31 +9,8 @@ module Mmailer
     end
 
     def set_provider(provider)
-
-      mandrill_config = Proc.new do
-        delivery_method :smtp, {
-            :port => 587,
-            :address => ENV['MANDRILL_SMTP'],
-            :user_name => ENV['MANDRILL_USERNAME'],
-            :password => ENV['MANDRILL_API_KEY']
-        }
-      end
-
-      gmail_config = Proc.new do
-        delivery_method :smtp, {
-            :port => 587,
-            :address => ENV['GMAIL_SMTP'],
-            :user_name => ENV['GMAIL_USERNAME'],
-            :password => ENV['GMAIL_PASSWORD'],
-            :authentication => :plain,
-            :enable_starttls_auto => true
-        }
-      end
-
-      providers = {google: gmail_config, mailchimp: mandrill_config}
-
+      providers = {google: Providers.gmail, mailchimp: Providers.mandrill}
       Mail.defaults(&providers[provider])
-
     end
 
     def send_email(user)

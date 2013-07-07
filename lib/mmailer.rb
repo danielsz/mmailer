@@ -13,22 +13,11 @@ module Mmailer
 
   config = File.join(Bundler.root, 'config.rb')
 
+  puts Dir.pwd
   if File.exists? config
     load config
   else
     puts "No configuration file found"
   end
 
-  def Mmailer.start_server
-    require 'drb/drb'
-    #uri = ARGV.shift
-    uri = 'druby://localhost:12345'
-    DRb.start_service(uri, Mmailer::MasterHelper.new)
-    puts DRb.uri
-    begin
-      DRb.thread.join
-    rescue Interrupt
-        abort "Shutting down..."
-    end
-  end
 end
