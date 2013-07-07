@@ -1,5 +1,6 @@
 require "bundler/gem_tasks"
 require 'rspec/core/rake_task'
+require 'mmailer'
 
 RSpec::Core::RakeTask.new(:spec)
 
@@ -11,7 +12,7 @@ task :console do
 end
 
 task :master do
-  sh "irb -rubygems -I lib -I lib/mmailer -r mmailer.rb -r master.rb"
+  Mmailer.start_server
 end
 
 task :start do

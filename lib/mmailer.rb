@@ -3,6 +3,7 @@ require "mmailer/version"
 module Mmailer
   require 'bundler'
   require 'mail'
+  require 'micromachine'
   require 'erb'
   require 'mmailer/master_helper'
   require 'mmailer/mail_helper'
@@ -20,7 +21,6 @@ module Mmailer
 
   def Mmailer.start_server
     require 'drb/drb'
-    require 'micromachine'
     #uri = ARGV.shift
     uri = 'druby://localhost:12345'
     DRb.start_service(uri, Mmailer::MasterHelper.new)
