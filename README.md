@@ -1,10 +1,24 @@
 # Mmailer
 
-TODO: Write a gem description
+## Purpose
+
+The purpose of this gem is to allow the sending of bulk email through regular smtp providers, like gmail.
+Regular smpt providers imposes restrictions on how much mail you can send, with various throttling strategies.
+is often applied on number of emails per hour, or per day
 
 ## Installation
 
-Add this line to your application's Gemfile:
+    $ gem install mmailer
+
+## Usage
+
+All functionality is invoked via the gem's binary, mmailer.
+
+    $ mmailer
+
+### Bundler
+
+Although this gem performs like a utility that runs standalone, nothing prevents you from adding the following in a project's Gemfile:
 
     gem 'mmailer'
 
@@ -12,13 +26,34 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
 
-    $ gem install mmailer
+In this case, you can run
+```ruby
+bundle exec mmailer
+```
 
-## Usage
+## Configuration
 
-TODO: Write usage instructions here
+The big advantage of mmailer is that it doesn't require any external code to operate. Instead, you configure it.
+You need to provide three things in order to let mmailer send bulk email.
+
+ * environment variables
+ * a configuration file
+ * template files
+
+### Environment variables
+
+### Configuration
+
+### Templates
+
+## Implementation
+
+
+## TODO
+
+* Web interface
+* Command-line interface
 
 ## Contributing
 
