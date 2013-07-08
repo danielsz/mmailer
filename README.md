@@ -66,16 +66,14 @@ bundle exec mmailer
 The big advantage of `mmailer` is that it doesn't require any external code to operate. Instead, you configure it.
 You need to provide three things in order to let `mmailer` send bulk email.
 
- * environment variables
- * a configuration file
- * template files
+  * a configuration file
+  * template files
+  * environment variables
+
+### Configuration
 
 Here is what a sample configuration file looks like:
 ```ruby
-ENV['GMAIL_USERNAME']="username"
-ENV['GMAIL_PASSWORD']="password"
-ENV['MMAILER_ENV'] = "production"
-
 Mmailer.configure do |config|
   config.provider = :google
   config.from = 'Etsy Fu <info@shopi-fu.com>'
@@ -88,16 +86,23 @@ Mmailer.configure do |config|
   config.time_interval = 6
 end
 ```
-### Environment variables
 
 * `from`: The from address.
 * `subject`: The subject.
 
-### Configuration
-
 ### Templates
 
 Templates are the body of your mail. They use erb
+
+### Environment variables
+
+Ruby can load environment variables for you. It is thus convenient to put them at the top of `config.rb`
+```ruby
+ENV['GMAIL_USERNAME']="username"
+ENV['GMAIL_PASSWORD']="password"
+ENV['MMAILER_ENV'] = "production"
+```
+
 ## Implementation
 
 * Drb
