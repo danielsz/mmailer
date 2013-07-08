@@ -1,9 +1,9 @@
 # Mmailer
 
-## Purpose
+## Rationale
 
-The purpose of Mmailer is to allow the sending of bulk email through regular smtp providers, like gmail.
-Regular smtp providers imposes restrictions on how much mail you can send. Because various throttling strategies are used, and because they are not  always explicit, it is sometimes difficult to know where you stand with bulk email.
+The purpose of Mmailer is to allow the sending of bulk email, like a newsletter, through regular SMTP providers (Gmail).
+Regular SMTP providers imposes restrictions on how much mail you can send. Because various throttling strategies are used, and because they are not  always explicit, it is sometimes difficult to know where you stand with bulk email.
 Mmailer is flexible, and it well help you make sure you stay within those limits, whatever they may be.
 You can tell Mmailer to randomize the interval between the sending of emails, how long it should wait after a number of emails have been sent, pause the mail queue, resume it at will...
 
