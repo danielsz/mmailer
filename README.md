@@ -88,21 +88,46 @@ Mmailer.configure do |config|
   config.provider = :google
   config.from = 'Etsy Fu <info@shopi-fu.com>'
   config.subject = "Test"
+  config.time_interval = 6          #optional
+  config.mail_interval = 48         #optional
+  config.sleep_time = 3600          #optional
   config.template = "test"
-  config.collection = Proc.new do
-    User = Struct.new(:email)
-    [User.new("first@email.com"), User.new("second@email.com"), User.new("third@email.com")]
+  config.collection = lambda do
+    User = Struct.new(:email, :name)
+    [User.new("first@email.com", "Greyjoy"), User.new("second@email.com", "Lannister"), User.new("third@email.com", "Martell")]
   end
-  config.time_interval = 6
 end
 ```
 
-* `from`: The from address.
-* `subject`: The subject.
+* `from`: The from address that will be used in your emails.
+* `subject`: The subject of your email.
+* `provider`: The name of your provider. These are preset. For the moment, Google, Zoho and Mandrill are defined. Please add more via pull requests or by sending me mail.
+* `time_interval`: The number of seconds we want to wait between emails. We use this value as a ceiling when randomizing.
+* `mail_interval`: After how many emails we wait before continuing.
+* `sleep_time`: How long we wait when we reach the mail interval.
+* `collection`: An array of objects that respond to an :email call. In the above example, the objects also respond to :name call. This will prove handy in templates. Instead of directly providing the array, it is highly recommended to specify a lambda that returns said array.
+* `template`: The path and filename to the ERB templates for your mail, without suffix. For example, "template". This means your template files are actually "template.txt.erb" and "template.html.erb" in the current directory.
 
 ### Templates
 
-Templates are the body of your mail. They use erb
+Templates are the body of your mail. They use the ERB templating system. This means that you have access to each element of your collection inside the template. If you're familiar with Rails, you should recognize this. Based on the collection in the previous example, a sample template would look like this:
+
+```ruby
+Dear <%= user.name %>
+
+This is my newsletter.
+
+Yours.
+
+```
+
+And the equivalent html template.
+
+```ruby
+<p>Dear <em><%= user.name %></em>/p>
+<p>This is my newsletter.</p>
+<p>Yours.</p>
+```
 
 ### Environment variables
 
@@ -112,6 +137,9 @@ ENV['GMAIL_USERNAME']="username"
 ENV['GMAIL_PASSWORD']="password"
 ENV['MMAILER_ENV'] = "production"
 ```
+
+### Examples
+
 
 ## Implementation
 

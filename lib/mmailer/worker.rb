@@ -1,12 +1,16 @@
 module Mmailer
   class Worker
-    attr_reader :obj, :mailHelper, :collection, :from
+    # two froms, not equal
+    attr_reader :obj, :mailHelper, :collection, :time_interval, :mail_interval, :sleep_time, :from
 
     def initialize(from)
       @from = from
       @obj = DRbObject.new_with_uri('druby://localhost:12345')
       meta = { subject: Mmailer.configuration.subject, from:  Mmailer.configuration.from, template: Mmailer.configuration.template, provider: Mmailer.configuration.provider }
       @mailHelper = MailHelper.new(meta)
+      @time_interval = Mmailer.configuration.time_interval
+      @mail_interval = Mmailer.configuration.mail_interval
+      @sleep_time = Mmailer.configuration.sleep_time
       load_collection
       exec
     end
@@ -21,10 +25,10 @@ module Mmailer
             user = collection.shift
             obj.puts "#{index}: #{user.email}"
             mailHelper.send_email(user) if not user.email.nil?
-            sleep rand(Mmailer.configuration.time_interval)
-            if index % Mmailer.configuration.mail_interval == 0
-              obj.puts "#{Mmailer.configuration.mail_interval} element, going to sleep for #{Mmailer.configuration.sleep_time} seconds"
-              sleep Mmailer.configuration.sleep_time
+            sleep rand(time_interval)
+            if index % mail_interval == 0
+              obj.puts "#{mail_interval} element, going to sleep for #{sleep_time} seconds"
+              sleep sleep_time
             end
           when :stopped
             break
@@ -36,7 +40,7 @@ module Mmailer
     end
 
     def load_collection
-      @collection = Mmailer.configuration.collection.call
+      @collection = Mmailer.configuration.collection.lambda? ? Mmailer.configuration.collection.call : Mmailer.configuration.collection
       collection.shift(from)
       obj.puts "Loaded #{collection.count} entries"
     end
