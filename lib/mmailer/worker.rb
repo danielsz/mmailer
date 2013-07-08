@@ -5,7 +5,7 @@ module Mmailer
     def initialize(from)
       @from = from
       @obj = DRbObject.new_with_uri('druby://localhost:12345')
-      meta = { title: Mmailer.configuration.subject, template: Mmailer.configuration.template, provider: Mmailer.configuration.provider }
+      meta = { subject: Mmailer.configuration.subject, template: Mmailer.configuration.template, provider: Mmailer.configuration.provider }
       @mailHelper = MailHelper.new(meta)
       load_collection
       exec
@@ -21,21 +21,22 @@ module Mmailer
             user = collection.shift
             obj.puts "#{index}: #{user.email}"
             mailHelper.send_email(user) if not user.email.nil?
-            sleep rand(6)
-            if index % 48 == 0
-              obj.puts "48th element, going to sleep for an hour"
-              sleep 3600
+            sleep rand(Mmailer.configuration.time_interval)
+            if index % Mmailer.configuration.mail_interval == 0
+              obj.puts "#{Mmailer.configuration.mail_interval} element, going to sleep for #{Mmailer.configuration.sleep_time} seconds"
+              sleep Mmailer.configuration.sleep_time
             end
           when :stopped
             break
         end
       end
-      obj.puts "Exiting worker"
+      obj.puts "Exiting worker, stopping server"
+      DRb::stop_service
       Thread.exit
     end
 
     def load_collection
-      @collection = User.active
+      @collection = Mmailer.configuration.collection.call
       collection.shift(from)
       obj.puts "Loaded #{collection.count} entries"
     end

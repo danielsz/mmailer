@@ -2,7 +2,7 @@ module Mmailer
   class MailHelper
     attr_reader :template, :subject
 
-    def initialize
+    def initialize(args)
       set_provider args.fetch(:provider, :mailchimp)
       @template=args[:template]
       @subject=args[:subject]
@@ -22,18 +22,18 @@ module Mmailer
       mail.subject = subject
 
       text_part = Mail::Part.new
-      text_part.body=ERB.new(File.read(Dir.pwd + Mmailer.configuration.template)).result(binding)
+      text_part.body=ERB.new(File.read(Dir.pwd + "/" + Mmailer.configuration.template + ".txt.erb")).result(binding)
 
       html_part = Mail::Part.new
       html_part.content_type='text/html; charset=UTF-8'
-      html_part.body=ERB.new(File.read(Dir.pwd + Mmailer.configuration.template)).result(binding)
+      html_part.body=ERB.new(File.read(Dir.pwd + "/" + Mmailer.configuration.template + ".html.erb")).result(binding)
 
       mail.text_part = text_part
       mail.html_part = html_part
       #when Non US-ASCII detected and no charset defined. Defaulting to UTF-8, set your own if this is incorrect.
       mail.charset = 'UTF-8'
-      #puts mail.to_s
-      mail.deliver!
+      puts mail.to_s
+      #mail.deliver!
 
     end
   end

@@ -20,13 +20,13 @@ task :start do
 end
 
 task :pause do
-  client(:start)
+  client(:pause)
 end
 task :resume do
-  client(:start)
+  client(:resume)
 end
 task :stop do
-  client(:start)
+  client(:stop)
 end
 
 private
