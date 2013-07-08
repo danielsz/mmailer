@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The purpose of Mmailer, a standalone program, is to allow the sending of bulk email through regular smtp providers, like gmail.
+The purpose of Mmailer is to allow the sending of bulk email through regular smtp providers, like gmail.
 Regular smtp providers imposes restrictions on how much mail you can send. Because various throttling strategies are used, and because they are not  always explicit, it is sometimes difficult to know where you stand with bulk email.
 Mmailer is flexible, and it well help you make sure you stay within those limits, whatever they may be.
 You can tell Mmailer to randomize the interval between the sending of emails, how long it should wait after a number of emails have been sent, pause the mail queue, resume it at will...
@@ -47,7 +47,7 @@ To restart from  the 56th element in your queue (more on this later).
 
 ### Bundler
 
-Although this gem performs like a utility that runs standalone, nothing prevents you from adding the following in a project's Gemfile:
+Although this gem performs as a standalone program, nothing prevents you from adding the following in a project's Gemfile:
 
     gem 'mmailer'
 
@@ -87,11 +87,11 @@ Mmailer.configure do |config|
   end
   config.time_interval = 6
 end
-
 ```
 ### Environment variables
 
-``
+* `from`: The from address.
+* `subject`: The subject.
 
 ### Configuration
 
@@ -109,6 +109,10 @@ Templates are the body of your mail. They use erb
 * [] Web interface
 * [] Command-line interface
 * [] Documentation
+
+## Spam & motivation
+
+Spam is evil. This is not a spammer's tool. I wrote this so as to send a newsletter to my users.
 
 ## Contributing
 
