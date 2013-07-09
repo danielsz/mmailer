@@ -11,7 +11,6 @@ $:.unshift File.expand_path("../../lib", bin_file)
 
 ###
 
-require 'mmailer'
 require 'thor'
 require 'mmailer/commands'
 
