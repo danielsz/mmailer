@@ -8,7 +8,7 @@ class MyCLI < Thor
 
   desc "start FROM", "Start an email run from FROM (default is 0, start of the collection)."
   def start(from=0)
-    client(:start)
+    client(:start, from.to_i)
   end
 
   desc "pause", "Pause an email run."
@@ -29,12 +29,16 @@ class MyCLI < Thor
 
   private
 
-  def client(cmd)
+  def client(cmd, args=nil)
     require 'drb/drb'
     uri = 'druby://localhost:12345'
     begin
       obj = DRbObject.new_with_uri(uri)
-      obj.send(cmd)
+      if args
+        obj.send(cmd, args)
+      else
+        obj.send(cmd)
+      end
     rescue DRb::DRbConnError => e
       puts e.message + "\nIs the server running? (You can start the server with)"
     end
