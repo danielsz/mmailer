@@ -1,6 +1,7 @@
 require "mmailer/version"
 
 module Mmailer
+
   require 'mail'
   require 'micromachine'
   require 'erb'

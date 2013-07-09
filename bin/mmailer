@@ -13,6 +13,6 @@ $:.unshift File.expand_path("../../lib", bin_file)
 
 require 'mmailer'
 require 'thor'
-require 'mmailer/tasks/commands'
+require 'mmailer/commands'
 
 MyCLI.start(ARGV)
