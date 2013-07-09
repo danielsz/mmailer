@@ -106,7 +106,7 @@ end
 * `mail_interval`: After how many emails we wait before continuing.
 * `sleep_time`: How long we wait when we reach the mail interval.
 * `collection`: An array of objects that respond to an `email` message. In the above example, the objects also respond to a `name` message. This will prove handy in templates. Instead of directly providing the array, it is highly recommended to specify a lambda that returns said array.
-* `template`: The path and filename to the ERB templates for your mail, without suffix. For example, "template". This means your template files are actually "template.txt.erb" and "template.html.erb" in the current directory.
+* `template`: The path (relative to the current directory) and filename to the ERB templates for your mail, without suffix. For example, "template". This means your template files are actually "template.txt.erb" and "template.html.erb" in the current directory.
 
 ### Templates
 
