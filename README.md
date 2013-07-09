@@ -73,7 +73,7 @@ bundle exec mmailer
 
 ## Configuration
 
-The big advantage of `mmailer` is that it doesn't require any external code to operate. Instead, you configure it.
+`mmailer` doesn't require any external code to operate. Instead, you configure it.
 You need to provide three things in order to let `mmailer` send bulk email.
 
   * a configuration file
@@ -86,7 +86,7 @@ Here is what a sample configuration file looks like:
 ```ruby
 Mmailer.configure do |config|
   config.provider = :google
-  config.from = 'Etsy Fu <info@shopi-fu.com>'
+  config.from = 'Daenerys Targaryen <daenerys@house_targaryen.com>'
   config.subject = "Test"
   config.time_interval = 6          #optional
   config.mail_interval = 48         #optional
@@ -105,12 +105,12 @@ end
 * `time_interval`: The number of seconds we want to wait between emails. We use this value as a ceiling when randomizing.
 * `mail_interval`: After how many emails we wait before continuing.
 * `sleep_time`: How long we wait when we reach the mail interval.
-* `collection`: An array of objects that respond to an :email call. In the above example, the objects also respond to :name call. This will prove handy in templates. Instead of directly providing the array, it is highly recommended to specify a lambda that returns said array.
+* `collection`: An array of objects that respond to an `email` message. In the above example, the objects also respond to a `name` message. This will prove handy in templates. Instead of directly providing the array, it is highly recommended to specify a lambda that returns said array.
 * `template`: The path and filename to the ERB templates for your mail, without suffix. For example, "template". This means your template files are actually "template.txt.erb" and "template.html.erb" in the current directory.
 
 ### Templates
 
-Templates are the body of your mail. They use the ERB templating system. This means that you have access to each element of your collection inside the template. If you're familiar with Rails, you should recognize this. Based on the collection in the previous example, a sample template would look like this:
+Templates are the body of your mail. They use the ERB templating system. This means that you have access to each element of your collection inside the template. If you're familiar with Rails, you should recognize this pattern. Based on the collection in the previous example, a sample template would look like this:
 
 ```ruby
 Dear <%= user.name %>
