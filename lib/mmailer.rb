@@ -8,7 +8,7 @@ module Mmailer
   require 'mmailer/config'
   require 'mmailer/providers'
   require 'mmailer/server'
-  require 'mmailer/master_helper'
+  require 'mmailer/server_helper'
   require 'mmailer/mail_helper'
   require 'mmailer/worker'
 

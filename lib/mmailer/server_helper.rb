@@ -1,5 +1,5 @@
 module Mmailer
-  class MasterHelper
+  class ServerHelper
     attr_accessor :stream, :worker, :machine
 
     def initialize
