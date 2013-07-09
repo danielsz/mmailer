@@ -40,7 +40,7 @@ class MyCLI < Thor
         obj.send(cmd)
       end
     rescue DRb::DRbConnError => e
-      puts e.message + "\nIs the server running? (You can start the server with)"
+      puts e.message + "\nIs the server running? (You can start the server with `mmailer server`)"
     end
   end
 end

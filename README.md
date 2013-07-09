@@ -35,7 +35,7 @@ You start the server in a terminal.
 
 ### Remote control
 
-You issue commands in a separate terminal. To start sending emails, run:
+You issue commands in a separate terminal. To start sending emails, type:
 
     $ mmailer start
 
