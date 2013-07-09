@@ -87,11 +87,11 @@ Here is what a sample configuration file looks like:
 Mmailer.configure do |config|
   config.provider = :google
   config.from = 'Daenerys Targaryen <daenerys@house_targaryen.com>'
-  config.subject = "Test"
-  config.time_interval = 6          #optional
-  config.mail_interval = 48         #optional
-  config.sleep_time = 3600          #optional
-  config.template = "test"
+  config.subject = "Fire and Blood"
+  config.time_interval = 6          #optional, default value is 6 seconds
+  config.mail_interval = 48         #optional, default value is 48 emails
+  config.sleep_time = 3600          #optional, default value is 3600 seconds
+  config.template = "template"
   config.collection = lambda do
     User = Struct.new(:email, :name)
     [User.new("first@email.com", "Greyjoy"), User.new("second@email.com", "Lannister"), User.new("third@email.com", "Martell")]
