@@ -156,7 +156,7 @@ You can define multiple pairs of usernames and passwords for the predefined prov
 ## TODO
 
 * [] Web interface
-* [] Command-line interface
+* [X] Command-line interface
 * [] Documentation
 
 ## Spam & motivation
