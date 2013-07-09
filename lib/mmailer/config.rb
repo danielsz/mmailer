@@ -17,7 +17,7 @@ module Mmailer
   end
 
   class Configuration
-    attr_accessor :provider, :template, :subject, :from, :server_port, :collection, :time_interval, :mail_interval, :sleep_time
+    attr_accessor :provider, :from, :template, :subject, :server_port, :collection, :time_interval, :mail_interval, :sleep_time
 
     def sleep_time
       @sleep_time || 3600

@@ -138,6 +138,12 @@ ENV['GMAIL_PASSWORD']="password"
 ENV['MMAILER_ENV'] = "production"
 ```
 
+* `MMAILER_ENV`: In production mode, emails get sent. In development mode, they get printed to STDOUT.
+* `PROVIDER_USERNAME`: Username for the provider.
+* `PROVIDER_PASSWORD`: Password for the provider.
+
+You can define multiple pairs of usernames and passwords for the predefined providers.
+
 ### Examples
 
 

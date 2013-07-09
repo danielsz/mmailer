@@ -12,7 +12,6 @@ module Mmailer
   require 'mmailer/mail_helper'
   require 'mmailer/worker'
 
-
 ## read config
   config = File.join(Dir.pwd, 'config.rb')
 

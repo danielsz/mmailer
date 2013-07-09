@@ -1,10 +1,18 @@
 #!/usr/bin/env ruby
 
-begin
-  require 'mmailer'
-rescue LoadError
-  require 'rubygems'
-  require 'mmailer'
-end
+### Preliminaries to make the `require`'s below work
 
-Mmailer.start_server
+# resolve bin path, ignoring symlinks
+require "pathname"
+bin_file = Pathname.new(__FILE__).realpath
+
+# add self to libpath
+$:.unshift File.expand_path("../../lib", bin_file)
+
+###
+
+require 'mmailer'
+require 'thor'
+require 'mmailer/tasks/commands'
+
+MyCLI.start(ARGV)
