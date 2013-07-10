@@ -3,14 +3,14 @@ module Mmailer
     attr_reader :template, :subject, :from
 
     def initialize(args)
-      set_provider args.fetch(:provider, :mailchimp)
+      set_provider args.fetch(:provider, :mandrill)
       @template=args[:template]
       @subject=args[:subject]
       @from=args[:from]
     end
 
     def set_provider(provider)
-      providers = {google: Providers.gmail, mailchimp: Providers.mandrill}
+      providers = {google: Providers.gmail, mandrill: Providers.mandrill, zoho: Providers.zoho}
       Mail.defaults(&providers[provider])
     end
 

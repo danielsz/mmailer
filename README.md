@@ -85,7 +85,7 @@ You need to provide three things in order to let `mmailer` send bulk email.
 Here is what a sample configuration file looks like:
 ```ruby
 Mmailer.configure do |config|
-  config.provider = :google
+  config.provider = :gmail
   config.from = 'Daenerys Targaryen <daenerys@house_targaryen.com>'
   config.subject = "Fire and Blood"
   config.time_interval = 6          #optional, default value is 6 seconds
@@ -101,7 +101,7 @@ end
 
 * `from`: The from address that will be used in your emails.
 * `subject`: The subject of your email.
-* `provider`: The name of your provider. These are preset. For the moment, Google, Zoho and Mandrill are defined. Please add more via pull requests or by sending me mail.
+* `provider`: The name of your provider. These are preset. For the moment, Gmail, Zoho and Mandrill are defined. Please add more via pull requests or by sending me mail.
 * `time_interval`: The number of seconds we want to wait between emails. We use this value as a ceiling when randomizing.
 * `mail_interval`: After how many emails we wait before continuing.
 * `sleep_time`: How long we wait when we reach the mail interval.
