@@ -56,6 +56,8 @@ To restart from  the 56th element in your queue (more on this later).
 
     $ mmailer start 56
 
+The results of above commands are displayed in the server terminal.
+
 ### Bundler
 
 Although this gem performs as a standalone program, nothing prevents you from adding the following in a project's Gemfile:
@@ -203,6 +205,8 @@ total 40
 -rw-r--r--  1 daniel  1000    81 יול 14 03:44 newsletter.html.erb
 -rw-r--r--  1 daniel  1000    60 יול 14 03:44 newsletter.txt.erb
 ```
+
+You are now ready to send your newsletter. In one terminal, type `mmailer server`, in another type `mmailer start`. Output will be displayed in the server terminal.
 
 ### More examples
 
