@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Mmailer::VERSION
   spec.authors       = ["Daniel Szmulewicz"]
   spec.email         = ["danielsz@freeshell.org"]
-  spec.description   = %q{Mass mailer with remote control (drb server)}
-  spec.summary       = %q{Mass mailing the Ruby way}
-  spec.homepage      = ""
+  spec.description   = %q{Bulk mailer with remote control (drb server)}
+  spec.summary       = %q{Bulk mailing the Ruby way}
+  spec.homepage      = "https://github.com/danielsz/mmailer"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
