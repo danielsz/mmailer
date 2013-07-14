@@ -125,7 +125,7 @@ Yours.
 And the equivalent html template.
 
 ```ruby
-<p>Dear <em><%= user.name %></em>/p>
+<p>Dear <em><%= user.name %></em></p>
 <p>This is my newsletter.</p>
 <p>Yours.</p>
 ```
