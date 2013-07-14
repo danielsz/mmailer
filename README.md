@@ -222,6 +222,10 @@ The server exposes an object representing the state of your queue (started/stopp
 
 We use MicroMachine, a minimal finite state machine, to help with the state transitioning.
 
+### Mail
+
+We leverage the ubiquitous Mail gem to do the actual sending of email.
+
 ### CLI
 
 We used Thor to provide a command line interface.
