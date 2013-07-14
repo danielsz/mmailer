@@ -3,8 +3,8 @@
 ## Rationale
 
 The purpose of Mmailer is to allow the sending of personalized bulk email, like a newsletter, through regular SMTP providers (Gmail).
-Regular SMTP providers imposes restrictions on how much mail you can send. Because various throttling strategies are used, and because they are not  always explicit, it is sometimes difficult to know where you stand with bulk email.
-Mmailer is flexible, and it well help you make sure you stay within those limits, whatever they may be. Mmailer is backend agnostic. Nor does it make any assumptions on data formats. It will process the objects you feed it. You can tell Mmailer to randomize the interval between the sending of emails, how long it should wait after a number of emails have been sent, pause the mail queue, resume it at will...
+Regular SMTP providers imposes restrictions on how much mail you can send. Because various throttling strategies are used, and because they are not  always explicit, it is sometimes difficult to evaluate whether you will succeed in sending that newsletter of yours to all of your users.
+Mmailer is flexible, and well help you make sure you stay within those limits, whatever they may be. Mmailer is backend agnostic. Nor does it make any assumptions on data formats. It will process the objects you feed it. You can tell Mmailer to randomize the interval between the sending of emails, how long it should wait after a number of emails have been sent, pause the mail queue, resume it at will...
 
 Is it any good?
 ---
@@ -23,7 +23,7 @@ All functionality is invoked via the gem's binary, mmailer.
 
     $ mmailer
 
-### Principle of operation
+## Principle of operation
 
 A server runs behind the scenes, managing the email queue, and you send it commands to start, pause, resume or stop.
 
@@ -80,9 +80,9 @@ You need to provide three things in order to let `mmailer` send bulk email.
   * template files
   * environment variables
 
-### Configuration
+### Configuration file
 
-Here is what a sample configuration file looks like:
+That file is called config.rb. Here is what a sample configuration file looks like:
 ```ruby
 Mmailer.configure do |config|
   config.provider = :gmail
@@ -105,7 +105,7 @@ end
 * `time_interval`: The number of seconds we want to wait between emails. We use this value as a ceiling when randomizing.
 * `mail_interval`: After how many emails we wait before continuing.
 * `sleep_time`: How long we wait when we reach the mail interval.
-* `collection`: An array of objects that respond to an `email` message. In the above example, the objects also respond to a `name` message. This will prove handy in templates. Instead of directly providing the array, it is highly recommended to specify a lambda that returns said array.
+* `collection`: An array of objects that respond to an `email` message. In the above example, the objects also respond to a `name` message. This will prove handy in templates. Instead of directly providing the array, it is recommended to specify a lambda that returns said array. You will then be able to make expensive calls to your database, bringing as many objects as memory permits, without impacting the server startup time.
 * `template`: The path (relative to the current directory) and filename to the ERB templates for your mail, without suffix. For example, "template". This means your template files are actually "template.txt.erb" and "template.html.erb" in the current directory.
 
 ### Templates
@@ -146,12 +146,29 @@ You can define multiple pairs of usernames and passwords for the predefined prov
 
 ### Examples
 
+More configuration examples soon.
 
-## Implementation
+## Architecture & Implementation
 
-* Drb
-* State machine
-* CLI
+### DRb
+
+The server exposes an object representing the state of your queue (started/stopped/paused). When the client asks the server to start sending email, the server spawns a thread which will subsequently check on that state object after each email sending, thus knowing if it should proceed, halt, or change behavior in other ways. DRb is used to implement this model.
+
+### State machine
+
+We use MicroMachine, a minimal finite state machine, to help with the state transitioning.
+
+### CLI
+
+We used Thor to provide a command line interface.
+
+### Web interface
+
+This program will be best served with some sort of GUI. A web-based interface (using Sinatra) is under consideration.
+
+## Status
+
+This program makes me happy. It solves one of my problems. It may not be a beginner's friendly program. You might want to wait for the web interface if it all seems a little bit too involved.
 
 ## TODO
 
@@ -159,9 +176,9 @@ You can define multiple pairs of usernames and passwords for the predefined prov
 * [X] Command-line interface
 * [] Documentation
 
-## Spam & motivation
+## Spam
 
-Spam is evil. This is not a spammer's tool. I wrote this so as to send a newsletter to my users.
+Mmailer is a mail sending tool. Don't use it for spamming purposes. Spam is evil.
 
 ## Contributing
 
