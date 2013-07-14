@@ -176,7 +176,7 @@ Mmailer.configure do |config|
 end
 ```
 
-Copy your mongoid.yml from your production system in the current directory. And create a mongo_helper.rb with your domain model.
+Copy your mongoid.yml from your production system in the current directory. And create a mongo_helper.rb with your domain models.
 
 ```ruby
 Mongoid.load!(File.join(Dir.pwd, "mongoid.yml"), :production)
