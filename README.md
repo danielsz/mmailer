@@ -243,6 +243,7 @@ This program makes me happy as it solves one of my problems. It may not be a beg
 * [] Web interface
 * [X] Command-line interface
 * [] Documentation
+* [] Test suite
 
 ## Spam
 
