@@ -236,7 +236,7 @@ This program will be best served with some sort of GUI. A web-based interface (u
 
 ## Status
 
-This program makes me happy as it solves one of my problems. It may not be a beginner's friendly program, however. You might want to wait for the web interface if it all seems a little bit too involved.
+This is an initial release. Currently, no checks or sanitation is done when parsing the configuration. Mmailer will just blow up when an error is encountered. In this early phase, the project targets early adopters, power users and contributors. The rest may want to wait for a later release that will hopefully sport an easy to use web interface.
 
 ## TODO
 
