@@ -56,8 +56,6 @@ To restart from  the 56th element in your queue (more on this later).
 
     $ mmailer start 56
 
-The results of above commands are displayed in the server terminal.
-
 ### Bundler
 
 Although this gem performs as a standalone program, nothing prevents you from adding the following in a project's Gemfile:
@@ -104,7 +102,7 @@ end
 
 * `from`: The from address that will be used in your emails.
 * `subject`: The subject of your email.
-* `provider`: The name of your provider. These are preset. For the moment, Gmail, Zoho and Mandrill are defined. Please add more via pull requests or by sending me mail.
+* `provider`: The name of your provider. These are preset. For the moment, one of `:gmail`, `:zoho` or `:mandrill`. Please add more providers via pull requests or by sending me mail.
 * `time_interval`: The number of seconds we want to wait between emails. We use this value as a ceiling when randomizing.
 * `mail_interval`: After how many emails we wait before continuing.
 * `sleep_time`: How long we wait when we reach the mail interval.
@@ -170,7 +168,7 @@ Mmailer.configure do |config|
   config.provider = :gmail
   config.subject = "My newsletter"
   config.template = "newsletter"
-  config.collection = lambda { User.all.entries}
+  config.collection = lambda { User.all.entries }
   config.time_interval = 6
   config.from = 'John Doe <john@example.com>'
 end
@@ -236,7 +234,7 @@ This program will be best served with some sort of GUI. A web-based interface (u
 
 ## Status
 
-This is an initial release. Currently, no checks or sanitation is done when parsing the configuration. Mmailer will just blow up when an error is encountered. In this early phase, the project targets early adopters, power users and contributors. Others may want to wait for a later release that will hopefully sport a web interface with better usability.
+This is an initial release. Currently, no checks or sanitation is done when parsing the configuration. Mmailer will just blow up when an error is encountered. At this early stage, the project targets power users and contributors. Others may want to wait for a later release that will hopefully sport a web interface with better usability.
 
 ## TODO
 
@@ -247,7 +245,7 @@ This is an initial release. Currently, no checks or sanitation is done when pars
 
 ## Spam
 
-Mmailer is a mail sending tool. Don't use it for spamming purposes. Spam is evil.
+Mmailer is a bulk mail sending tool. Don't use it for spamming purposes. Spam is evil.
 
 ## Contributing
 
