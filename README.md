@@ -236,7 +236,7 @@ This program will be best served with some sort of GUI. A web-based interface (u
 
 ## Status
 
-This is an initial release. Currently, no checks or sanitation is done when parsing the configuration. Mmailer will just blow up when an error is encountered. In this early phase, the project targets early adopters, power users and contributors. The rest may want to wait for a later release that will hopefully sport a web interface with better usability.
+This is an initial release. Currently, no checks or sanitation is done when parsing the configuration. Mmailer will just blow up when an error is encountered. In this early phase, the project targets early adopters, power users and contributors. Others may want to wait for a later release that will hopefully sport a web interface with better usability.
 
 ## TODO
 
