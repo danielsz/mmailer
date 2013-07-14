@@ -2,8 +2,9 @@
 
 ## Rationale
 
-The purpose of Mmailer is to allow the sending of personalized bulk email, like a newsletter, through regular SMTP providers (Gmail).
+The purpose of Mmailer is to allow the sending of personalized bulk email, like a newsletter, through regular SMTP providers (for example Gmail).
 Regular SMTP providers imposes restrictions on how much mail you can send. Because various throttling strategies are used, and because they are not  always explicit, it is sometimes difficult to evaluate whether you will succeed in sending that newsletter of yours to all of your users.
+
 Mmailer is flexible, and well help you make sure you stay within those limits, whatever they may be. Mmailer is backend agnostic. Nor does it make any assumptions on data formats. It will process the objects you feed it. You can tell Mmailer to randomize the interval between the sending of emails, how long it should wait after a number of emails have been sent, pause the mail queue, resume it at will...
 
 Is it any good?
@@ -82,7 +83,7 @@ You need to provide three things in order to let `mmailer` send bulk email.
 
 ### Configuration file
 
-That file is called config.rb. Here is what a sample configuration file looks like:
+Mmailer will look for a file name `config.rb` in the directory where you run it. Here is what a sample configuration file looks like:
 ```ruby
 Mmailer.configure do |config|
   config.provider = :gmail
@@ -91,7 +92,7 @@ Mmailer.configure do |config|
   config.time_interval = 6          #optional, default value is 6 seconds
   config.mail_interval = 48         #optional, default value is 48 emails
   config.sleep_time = 3600          #optional, default value is 3600 seconds
-  config.template = "template"
+  config.template = "newsletter"
   config.collection = lambda do
     User = Struct.new(:email, :name)
     [User.new("first@email.com", "Greyjoy"), User.new("second@email.com", "Lannister"), User.new("third@email.com", "Martell")]
@@ -106,11 +107,11 @@ end
 * `mail_interval`: After how many emails we wait before continuing.
 * `sleep_time`: How long we wait when we reach the mail interval.
 * `collection`: An array of objects that respond to an `email` message. In the above example, the objects also respond to a `name` message. This will prove handy in templates. Instead of directly providing the array, it is recommended to specify a lambda that returns said array. You will then be able to make expensive calls to your database, bringing as many objects as memory permits, without impacting the server startup time.
-* `template`: The path (relative to the current directory) and filename to the ERB templates for your mail, without suffix. For example, "template". This means your template files are actually "template.txt.erb" and "template.html.erb" in the current directory.
+* `template`: The path (relative to the current directory) and filename to the ERB templates for your mail, without suffix. For example, "newsletter". This means your template files are actually "newsletter.txt.erb" and "newsletter.html.erb" in the current directory.
 
 ### Templates
 
-Templates are the body of your mail. They use the ERB templating system. This means that you have access to each element of your collection inside the template. If you're familiar with Rails, you should recognize this pattern. Based on the collection in the previous example, a sample template would look like this:
+Templates are the body of your mail. They use the ERB templating system. Each element in your collection is available from within the template. (Much like Rails passes the instance variables from the controller to the views). Based on the collection in the previous example, a sample template would look like this:
 
 ```ruby
 Dear <%= user.name %>
@@ -144,9 +145,68 @@ ENV['MMAILER_ENV'] = "production"
 
 You can define multiple pairs of usernames and passwords for the predefined providers.
 
-### Examples
+## Real world examples
 
-More configuration examples soon.
+### Mongodb
+
+This will show you how to use Mmailer when your data lives in Mongodb. We are going to use mongoid to make the queries.
+
+Make a directory and create the configuration file and template files like previously described.
+
+The `config.rb` would look like this:
+
+```ruby
+ENV['GMAIL_USERNAME']="username"
+ENV['GMAIL_PASSWORD']="password"
+ENV['MMAILER_ENV'] = "development"
+
+require "rubygems"
+require "mongoid"
+require_relative "mongo_helper"
+
+Mmailer.configure do |config|
+  config.provider = :gmail
+  config.subject = "My newsletter"
+  config.template = "newsletter"
+  config.collection = lambda { User.all.entries}
+  config.time_interval = 6
+  config.from = 'John Doe <john@example.com>'
+end
+```
+
+Copy your mongoid.yml from your production system in the current directory. And create a mongo_helper.rb with your domain model.
+
+```ruby
+Mongoid.load!(File.join(Dir.pwd, "mongoid.yml"), :production)
+
+class User
+  include Mongoid::Document
+  has_many :profiles
+  ... #the rest of your relations
+end
+
+class Profile
+    include Mongoid::Document
+end
+
+... #the rest of the model classes that User references
+```
+
+The content of your directory would thus look something like this:
+
+```bash
+ls -l
+total 40
+-rw-r--r--  1 daniel  1000   424 יול 14 03:43 config.rb
+-rw-r--r--  1 daniel  1000  3587 יול 10 04:08 mongo_helper.rb
+-rw-r--r--  1 daniel  1000  3027 יול 10 03:39 mongoid.yml
+-rw-r--r--  1 daniel  1000    81 יול 14 03:44 newsletter.html.erb
+-rw-r--r--  1 daniel  1000    60 יול 14 03:44 newsletter.txt.erb
+```
+
+### More examples
+
+More configuration examples soon. (Please don't hesitate to contribute your configurations.)
 
 ## Architecture & Implementation
 
@@ -168,7 +228,7 @@ This program will be best served with some sort of GUI. A web-based interface (u
 
 ## Status
 
-This program makes me happy. It solves one of my problems. It may not be a beginner's friendly program. You might want to wait for the web interface if it all seems a little bit too involved.
+This program makes me happy as it solves one of my problems. It may not be a beginner's friendly program, however. You might want to wait for the web interface if it all seems a little bit too involved.
 
 ## TODO
 
