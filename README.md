@@ -105,7 +105,7 @@ end
 * `provider`: The name of your provider. These are preset. For the moment, one of `:gmail`, `:zoho` or `:mandrill`. Please add more providers via pull requests or by sending me mail.
 * `time_interval`: The number of seconds we want to wait between emails. We use this value as a ceiling when randomizing.
 * `mail_interval`: After how many emails we wait before continuing.
-* `sleep_time`: How long we wait when we reach the mail interval.
+* `sleep_time`: How long we wait when we reach the mail interval/threshold.
 * `collection`: An array of objects that respond to an `email` message. In the above example, the objects also respond to a `name` message. This will prove handy in templates. Instead of directly providing the array, it is recommended to specify a lambda that returns said array. You will then be able to make expensive calls to your database, bringing as many objects as memory permits, without impacting the server startup time.
 * `template`: The path (relative to the current directory) and filename to the ERB templates for your mail, without suffix. For example, "newsletter". This means your template files are actually "newsletter.txt.erb" and "newsletter.html.erb" in the current directory.
 
@@ -236,12 +236,13 @@ This program will be best served with some sort of GUI. A web-based interface (u
 
 This is an initial release. Currently, no checks or sanitation is done when parsing the configuration. Mmailer will just blow up when an error is encountered. At this early stage, the project targets power users and contributors. Others may want to wait for a later release that will hopefully sport a web interface with better usability.
 
-## TODO
+## Roadmap
 
 * [] Web interface
 * [X] Command-line interface
 * [] Documentation
 * [] Test suite
+* [] Generic template engine (Tilt, https://github.com/rtomayko/tilt)
 
 ## Spam
 
