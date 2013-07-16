@@ -29,11 +29,13 @@ module Mmailer
 
     @zoho = Proc.new do
       delivery_method :smtp, {
-          :port => 587,
+          :port => 465,
           :address => "smtp.zoho.com",
           :user_name => ENV['ZOHO_USERNAME'],
           :password => ENV['ZOHO_PASSWORD'],
-          :authentication => :plain,
+          :authentication => :login,
+          :ssl => true,
+          :tls => true,
           :enable_starttls_auto => true
       }
     end
