@@ -1,8 +1,8 @@
-## VERSION "0.0.5"
+## Version 0.0.5
 
 * Zoho set to port 465
 * display version in cli
 
-## VERSION "0.0.4"
+## Version 0.0.4
 
 * Initial release
