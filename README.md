@@ -5,7 +5,7 @@
 The purpose of Mmailer is to allow the sending of personalized bulk email, like a newsletter, through regular SMTP providers (for example Gmail).
 Regular SMTP providers imposes restrictions on how much mail you can send. Because various throttling strategies are used, and because they are not  always explicit, it is sometimes difficult to evaluate whether you will succeed in sending that newsletter of yours to all of your users.
 
-Mmailer is flexible, and well help you make sure you stay within those limits, whatever they may be. Mmailer is backend agnostic. Nor does it make any assumptions on data formats. It will process the objects you feed it. You can tell Mmailer to randomize the interval between the sending of emails, how long it should wait after a number of emails have been sent, pause the mail queue, resume it at will...
+Mmailer is flexible, and will help you make sure you stay within those limits, whatever they may be. Mmailer is backend agnostic. Nor does it make any assumptions on data formats. It will process the objects you feed it. You can tell Mmailer to randomize the interval between the sending of emails, how long it should wait after a number of emails have been sent, pause the mail queue, resume it at will...
 
 Is it any good?
 ---
