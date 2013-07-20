@@ -169,7 +169,6 @@ Mmailer.configure do |config|
   config.subject = "My newsletter"
   config.template = "newsletter"
   config.collection = lambda { User.all.entries }
-  config.time_interval = 6
   config.from = 'John Doe <john@example.com>'
 end
 ```
@@ -230,7 +229,7 @@ We used Thor to provide a command line interface.
 
 ### Web interface
 
-This program will be best served with some sort of GUI. A web-based interface (using Sinatra) is under consideration.
+This program will be best served with some sort of GUI. A web-based interface is under consideration. (Sinatra could be a good fit).
 
 ## Status
 
