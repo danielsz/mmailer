@@ -243,6 +243,10 @@ This is an initial release. Currently, no checks or sanitation is done when pars
 * [] Test suite
 * [] Generic template engine (Tilt, https://github.com/rtomayko/tilt)
 
+## License
+
+This software is released as open source under the LGPLv3 license. If you need a commercial license for private forks and modifications, we will provide you with a custom URL to a privately hosted gem with a commercial-friendly license. Please mail me for further inquiries.
+
 ## Spam
 
 Mmailer is a bulk mail sending tool. Don't use it for spamming purposes. Spam is evil.
