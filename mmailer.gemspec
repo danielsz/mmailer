@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Bulk mailer with remote control (drb server)}
   spec.summary       = %q{Bulk mailing the Ruby way}
   spec.homepage      = "https://github.com/danielsz/mmailer"
-  spec.license       = "MIT"
+  spec.license       = "LGPL.v3"
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'thor'
   spec.add_runtime_dependency 'mail'
   spec.add_runtime_dependency 'micromachine'
+  spec.add_runtime_dependency 'kramdown'
 end

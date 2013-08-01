@@ -1,3 +1,10 @@
+## Version 0.0.6
+
+* Markdown template
+* real-time configuration of the mail queue
+* Retry logic
+* Catch errors at_exit
+
 ## Version 0.0.5
 
 * Zoho set to port 465

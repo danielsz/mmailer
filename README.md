@@ -107,27 +107,38 @@ end
 * `mail_interval`: After how many emails we wait before continuing.
 * `sleep_time`: How long we wait when we reach the mail interval/threshold.
 * `collection`: An array of objects that respond to an `email` message. In the above example, the objects also respond to a `name` message. This will prove handy in templates. Instead of directly providing the array, it is recommended to specify a lambda that returns said array. You will then be able to make expensive calls to your database, bringing as many objects as memory permits, without impacting the server startup time.
-* `template`: The path (relative to the current directory) and filename to the ERB templates for your mail, without suffix. For example, "newsletter". This means your template files are actually "newsletter.txt.erb" and "newsletter.html.erb" in the current directory.
+* `template`: The path (relative to the current directory) and filename to the markdown/ERB template for your mail, without suffix. For example, "newsletter". This means your template file is actually "newsletter.md.erb" in the current directory.
 
 ### Templates
 
-Templates are the body of your mail. They use the ERB templating system. Each element in your collection is available from within the template. (Much like Rails passes the instance variables from the controller to the views). Based on the collection in the previous example, a sample template would look like this:
+Best practices for HTML email dictate that you send email in both `text/html` and `text/plain`. Since it is tedious to write and maintain two formats for the same content, Mmailer uses one markdown template that is used as-is for the textual part, and converts to HTML for its sister part.
+
+Prior to the markdown conversion, your template gets compiled by ERB. Each element in your collection is available from within the template. (Much like Rails passes the instance variables from the controller to the views). Based on the collection in the previous example, a sample template
+(`newsletter.md.erb`) might look like this:
+
 
 ```ruby
-Dear <%= user.name %>
+Dear <%= user.name %>,
 
 This is my newsletter.
 
 Yours.
-
 ```
 
-And the equivalent html template.
+It will result in the following `text/html` and `text/plain` bodies.
 
 ```ruby
-<p>Dear <em><%= user.name %></em></p>
+<p>Dear John Doe,</p>
 <p>This is my newsletter.</p>
 <p>Yours.</p>
+```
+
+```ruby
+Dear John Doe,
+
+This is my newsletter.
+
+Yours.
 ```
 
 ### Environment variables
@@ -199,8 +210,7 @@ total 40
 -rw-r--r--  1 daniel  1000   424 יול 14 03:43 config.rb
 -rw-r--r--  1 daniel  1000  3587 יול 10 04:08 mongo_helper.rb
 -rw-r--r--  1 daniel  1000  3027 יול 10 03:39 mongoid.yml
--rw-r--r--  1 daniel  1000    81 יול 14 03:44 newsletter.html.erb
--rw-r--r--  1 daniel  1000    60 יול 14 03:44 newsletter.txt.erb
+-rw-r--r--  1 daniel  1000    81 יול 14 03:44 newsletter.md.erb
 ```
 
 You are now ready to send your newsletter. In one terminal, type `mmailer server`, in another type `mmailer start`. Output will be displayed in the server terminal.

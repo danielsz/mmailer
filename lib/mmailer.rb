@@ -4,12 +4,14 @@ module Mmailer
 
   require 'mail'
   require 'micromachine'
+  require 'kramdown'
   require 'erb'
   require 'drb/drb'
   require 'mmailer/config'
   require 'mmailer/providers'
   require 'mmailer/server'
   require 'mmailer/server_helper'
+  require 'mmailer/utilities'
   require 'mmailer/mail_helper'
   require 'mmailer/worker'
 
