@@ -8,12 +8,11 @@ module Mmailer
       @obj = DRbObject.new_with_uri('druby://localhost:12345')
       meta = { subject: Mmailer.configuration.subject, from:  Mmailer.configuration.from, template: Mmailer.configuration.template, provider: Mmailer.configuration.provider }
       @mailHelper = MailHelper.new(meta)
-      @time_interval = Mmailer.configuration.time_interval
-      @mail_interval = Mmailer.configuration.mail_interval
-      @sleep_time = Mmailer.configuration.sleep_time
       load_collection
       exec
     end
+
+    private
 
     def exec
       while not collection.empty? do
@@ -21,6 +20,7 @@ module Mmailer
           when :paused
             sleep 1
           when :started
+            load_config
             index ||= from; index += 1
             user = collection.shift
             if not user.email.nil?
@@ -49,5 +49,10 @@ module Mmailer
       obj.puts "Loaded #{collection.count} entries"
     end
 
+    def load_config
+      @time_interval = Mmailer.configuration.time_interval
+      @mail_interval = Mmailer.configuration.mail_interval
+      @sleep_time = Mmailer.configuration.sleep_time
+    end
   end
 end

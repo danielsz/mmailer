@@ -40,17 +40,10 @@ class MyCLI < Thor
   option :mail_interval, :type => :numeric
   option :sleep_time, :type => :numeric
   def config
-    require 'mmailer/config'
     if options.empty?
-      puts "No options provided. Configuration unchanged."
-      puts "Sleep time: #{Mmailer.configuration.sleep_time} seconds"
-      puts "Mail interval time: #{Mmailer.configuration.mail_interval} seconds"
-      puts "Time interval: #{Mmailer.configuration.time_interval} seconds"
+      client(:config)
     else
-      Mmailer.configuration.sleep_time = options.fetch(:sleep_time, Mmailer.configuration.sleep_time)
-      Mmailer.configuration.mail_interval = options.fetch(:mail_interval, Mmailer.configuration.mail_interval)
-      Mmailer.configuration.time_interval = options.fetch(:sleep_time, Mmailer.configuration.time_interval)
-      puts "OK."
+      client(:config, options)
     end
   end
 
