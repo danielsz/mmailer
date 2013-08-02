@@ -11,7 +11,7 @@ module Mmailer
   require 'mmailer/providers'
   require 'mmailer/server'
   require 'mmailer/server_helper'
-  require 'mmailer/utilities'
+  require 'mmailer/error_handling'
   require 'mmailer/mail_helper'
   require 'mmailer/worker'
 

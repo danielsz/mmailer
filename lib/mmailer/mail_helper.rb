@@ -1,6 +1,6 @@
 module Mmailer
   class MailHelper
-    include Mmailer::Utilities
+    include ErrorHandling
     attr_reader :template, :subject, :from
 
     def initialize(args)

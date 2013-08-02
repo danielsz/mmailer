@@ -1,20 +1,5 @@
 module Mmailer
-  module Utilities
-
-    def client(cmd, args=nil)
-      require 'drb/drb'
-      uri = 'druby://localhost:12345'
-      begin
-        obj = DRbObject.new_with_uri(uri)
-        if args
-          obj.send(cmd, args)
-        else
-          obj.send(cmd)
-        end
-      rescue DRb::DRbConnError => e
-        puts e.message + "\nIs the server running? (You can start the server with `mmailer server`)"
-      end
-    end
+  module ErrorHandling
 
     def try(number_of_times=3)
         retry_count = 0
@@ -31,13 +16,17 @@ module Mmailer
             client(:pause)
           end
           nil
+        rescue Net::SMTPUnknownError => e
+          puts e.message
+          client(:pause)
         end
     end
 
     at_exit do
       if $!
-        puts "We're going down: #{$!.message} \n #{$!.backtrace}"
+        puts "We're going down: #{$!.class} \n #{$!.message} \n #{$!.backtrace}"
       end
     end
+
   end
 end

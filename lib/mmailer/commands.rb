@@ -1,7 +1,7 @@
-require 'mmailer/utilities'
+require 'mmailer/client'
 
 class MyCLI < Thor
-  include Mmailer::Utilities
+  include Mmailer::Client
 
   desc "server", "Start server."
   def server
