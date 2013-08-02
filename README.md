@@ -103,15 +103,15 @@ end
 * `from`: The from address that will be used in your emails.
 * `subject`: The subject of your email.
 * `provider`: The name of your provider. These are preset. For the moment, one of `:gmail`, `:zoho` or `:mandrill`. Please add more providers via pull requests or by sending me mail.
-* `time_interval`: The number of seconds we want to wait between emails. We use this value as a ceiling when randomizing.
-* `mail_interval`: After how many emails we wait before continuing.
-* `sleep_time`: How long we wait when we reach the mail interval/threshold.
+* `time_interval`: The number of seconds we want to wait between emails. This value is randomized, and represents thus the ceiling (maximum value).
+* `mail_interval`: How many emails we want to send before sleeping (see below).
+* `sleep_time`: How long we sleep when we reach the mail interval (see above).
 * `collection`: An array of objects that respond to an `email` message. In the above example, the objects also respond to a `name` message. This will prove handy in templates. Instead of directly providing the array, it is recommended to specify a lambda that returns said array. You will then be able to make expensive calls to your database, bringing as many objects as memory permits, without impacting the server startup time.
 * `template`: The path (relative to the current directory) and filename to the markdown/ERB template for your mail, without suffix. For example, "newsletter". This means your template file is actually "newsletter.md.erb" in the current directory.
 
 ### Templates
 
-Best practices for HTML email dictate that you send email in both `text/html` and `text/plain`. Since it is tedious to write and maintain two formats for the same content, Mmailer uses one markdown template that is used as-is for the textual part, and converts to HTML for its sister part.
+Best practices for HTML email prescribe that you send email in both `text/html` and `text/plain`. Since it is tedious to write and maintain two formats for the same content, Mmailer uses one markdown template that is used as-is for the textual part, and converts to HTML for its sister part.
 
 Prior to the markdown conversion, your template gets compiled by ERB. Each element in your collection is available from within the template. (Much like Rails passes the instance variables from the controller to the views). Based on the collection in the previous example, a sample template
 (`newsletter.md.erb`) might look like this:
@@ -155,6 +155,21 @@ ENV['MMAILER_ENV'] = "production"
 * `PROVIDER_PASSWORD`: Password for the provider.
 
 You can define multiple pairs of usernames and passwords for the predefined providers.
+
+### On-the-fly configuration
+
+Several configuration options can be changed dynamically, while the server is running.
+
+Those are:
+
+* `time_interval`: The number of seconds we want to wait between emails. This value is randomized, and represents thus the ceiling (maximum value).
+* `mail_interval`: How many emails we want to send before sleeping (see below).
+* `sleep_time`: How long we sleep when we reach the mail interval (see above).
+
+For usage instructions, type:
+
+    $ mmailer help config
+
 
 ## Real world examples
 
