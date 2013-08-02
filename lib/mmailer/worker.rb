@@ -23,9 +23,13 @@ module Mmailer
           when :started
             index ||= from; index += 1
             user = collection.shift
-            obj.puts "#{index}: #{user.email}"
-            mailHelper.send_email(user) if not user.email.nil?
-            sleep rand(time_interval)
+            if not user.email.nil?
+              obj.puts "#{index}: #{user.email}"
+              mailHelper.send_email(user)
+              sleep rand(time_interval)
+            else
+              obj.puts "#{index}: No email found. Skipping."
+            end
             if index % mail_interval == 0
               obj.puts "#{mail_interval} element, going to sleep for #{sleep_time} seconds"
               sleep sleep_time
