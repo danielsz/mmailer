@@ -58,8 +58,8 @@ module Mmailer
       end
     end
 
-    def config(options=nil)
-      if options.nil?
+    def config(options)
+      if options.empty?
         puts "I will send emails every #{Mmailer.configuration.time_interval} seconds. After #{Mmailer.configuration.mail_interval} emails, I will sleep for #{Mmailer.configuration.sleep_time} seconds."
       else
         Mmailer.configuration.sleep_time = options.fetch("sleep_time", Mmailer.configuration.sleep_time)

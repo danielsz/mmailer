@@ -40,11 +40,7 @@ class MyCLI < Thor
   option :mail_interval, :type => :numeric
   option :sleep_time, :type => :numeric
   def config
-    if options.empty?
-      client(:config)
-    else
       client(:config, options)
-    end
   end
 
 end
