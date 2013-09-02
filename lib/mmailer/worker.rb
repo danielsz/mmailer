@@ -38,13 +38,19 @@ module Mmailer
             break
         end
       end
-      obj.puts "Exiting worker, stopping server"
-      DRb::stop_service
-      Thread.exit
+      stop
     end
 
     def load_collection
-      @collection = Mmailer.configuration.collection.lambda? ? Mmailer.configuration.collection.call : Mmailer.configuration.collection
+      @collection = case Mmailer.configuration.collection
+                      when Array
+                        Mmailer.configuration.collection
+                      when Proc
+                        Mmailer.configuration.collection.call
+                      else
+                        obj.puts "Collection needs to be an array or a proc object. It appears to be neither."
+                        stop
+                    end
       collection.shift(from)
       obj.puts "Loaded #{collection.count} entries"
     end
@@ -53,6 +59,12 @@ module Mmailer
       @time_interval = Mmailer.configuration.time_interval
       @mail_interval = Mmailer.configuration.mail_interval
       @sleep_time = Mmailer.configuration.sleep_time
+    end
+
+    def stop
+      obj.puts "Exiting worker, stopping server"
+      DRb::stop_service
+      Thread.exit
     end
   end
 end
