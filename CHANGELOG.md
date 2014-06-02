@@ -1,3 +1,7 @@
+## Version 0.0.8
+
+* Recover from more network errors
+
 ## Version 0.0.7
 
 * Correctly handles Array or Proc passed in config.collection, warns if it something else.
