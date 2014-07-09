@@ -1,3 +1,7 @@
+## Version 0.0.9
+
+* Recover from Net::SMTPAuthenticationError
+
 ## Version 0.0.8
 
 * Recover from more network errors

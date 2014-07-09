@@ -5,7 +5,7 @@ module Mmailer
         retry_count = 0
         begin
           yield
-        rescue Net::OpenTimeout, Net::ReadTimeout, EOFError => e
+        rescue Net::OpenTimeout, Net::ReadTimeout, Net::SMTPAuthenticationError, EOFError => e
           retry_count += 1
           puts  "#{e.class}: #{e.message}: #{retry_count} retries"
           sleep retry_count
