@@ -23,7 +23,8 @@ module Mmailer
       mail.subject = subject
       #Defaulting to UTF-8, set your own if this is incorrect.
       mail.charset = 'UTF-8'
-
+      mail.content_transfer_encoding = '8bit'
+      
       compiled_source=ERB.new(File.read(Dir.pwd + "/" + Mmailer.configuration.template + ".md.erb")).result(binding)
 
       text_part = Mail::Part.new
