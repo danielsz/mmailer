@@ -17,11 +17,12 @@ module Mmailer
 
     def send_email(user)
 
-      mail = Mail.new do
-        to user.email
-      end
+      mail = Mail.new 
+      mail.to = user.email
       mail.from = from
       mail.subject = subject
+      #Defaulting to UTF-8, set your own if this is incorrect.
+      mail.charset = 'UTF-8'
 
       compiled_source=ERB.new(File.read(Dir.pwd + "/" + Mmailer.configuration.template + ".md.erb")).result(binding)
 
@@ -34,8 +35,6 @@ module Mmailer
 
       mail.text_part = text_part
       mail.html_part = html_part
-      #when Non US-ASCII detected and no charset defined. Defaulting to UTF-8, set your own if this is incorrect.
-      mail.charset = 'UTF-8'
 
       case ENV['MMAILER_ENV']
         when "production"
