@@ -1,3 +1,7 @@
+## Version 0.1.0
+
+* Exit when from Net::SMTPAuthenticationError
+
 ## Version 0.0.9
 
 * Recover from Net::SMTPAuthenticationError

@@ -1,3 +1,3 @@
 module Mmailer
-  VERSION = "0.0.10-alpha"
+  VERSION = "0.1.0"
 end
