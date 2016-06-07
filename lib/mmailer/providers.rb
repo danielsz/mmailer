@@ -2,7 +2,7 @@ module Mmailer
   module Providers
 
     class << self
-      attr_accessor :mandrill, :gmail, :zoho
+      attr_accessor :mandrill, :gmail, :zoho, :mailgun
     end
 
     @mandrill = Proc.new do
@@ -12,6 +12,17 @@ module Mmailer
           :user_name => ENV['MANDRILL_USERNAME'],
           :password => ENV['MANDRILL_PASSWORD'],
           :domain => 'heroku.com',
+          :authentication => :plain
+      }
+    end
+
+    @mailgun = Proc.new do
+      delivery_method :smtp, {
+          :port => 587,
+          :address => 'smtp.mailgun.org',
+          :user_name => ENV['MAILGUN_USERNAME'],
+          :password => ENV['MAILGUN_PASSWORD'],
+          :domain => ENV['MAILGUN_DOMAIN'],
           :authentication => :plain
       }
     end

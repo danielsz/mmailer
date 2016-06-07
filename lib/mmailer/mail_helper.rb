@@ -11,7 +11,7 @@ module Mmailer
     end
 
     def set_provider(provider)
-      providers = {gmail: Providers.gmail, mandrill: Providers.mandrill, zoho: Providers.zoho}
+      providers = {gmail: Providers.gmail, mandrill: Providers.mandrill, zoho: Providers.zoho, mailgun: Providers.mailgun }
       Mail.defaults(&providers[provider])
     end
 
