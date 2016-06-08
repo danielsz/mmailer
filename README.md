@@ -102,7 +102,7 @@ end
 
 * `from`: The from address that will be used in your emails.
 * `subject`: The subject of your email.
-* `provider`: The name of your provider. These are preset. For the moment, one of `:gmail`, `:zoho` or `:mandrill`. Please add more providers via pull requests or by sending me mail.
+* `provider`: The name of your provider. These are presets. For the moment, one of `:gmail`, `:zoho`, `:mandrill` or `:mailgun`. Please add more providers via pull requests or by sending me mail.
 * `time_interval`: The number of seconds we want to wait between emails. This value is randomized, and represents thus the ceiling (maximum value).
 * `mail_interval`: How many emails we want to send before sleeping (see below).
 * `sleep_time`: How long we sleep when we reach the mail interval (see above).
